@@ -11,9 +11,15 @@ contract sso {
         string username;
         string email;
         string password;
+        uint256 num;
     }
 
     event userCreated(string alter_email, string addr, uint256 number);
+
+    function isuser(string memory _user) public view returns (bool) {
+        if (usersList[_user].num > 0) return true;
+        else return false;
+    }
 
     function createUser(
         string memory _username,
@@ -23,9 +29,11 @@ contract sso {
         string memory _alt_email,
         uint256 _number
     ) public {
-        userCount++;
-        usersList[_username] = user(_username, _email, _password);
-        emit userCreated(_alt_email, _addr, _number);
+        if (isuser(_username) == true) {
+            userCount++;
+            usersList[_username] = user(_username, _email, _password, _number);
+            emit userCreated(_alt_email, _addr, _number);
+        }
     }
 
     function getusercount() public view returns (uint256) {
