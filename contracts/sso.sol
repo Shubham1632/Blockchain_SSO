@@ -29,7 +29,7 @@ contract sso {
         string memory _alt_email,
         uint256 _number
     ) public {
-        if (isuser(_username) == true) {
+        if (isuser(_username) == false) {
             userCount++;
             usersList[_username] = user(_username, _email, _password, _number);
             emit userCreated(_alt_email, _addr, _number);
