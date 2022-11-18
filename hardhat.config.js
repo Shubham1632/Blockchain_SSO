@@ -18,10 +18,10 @@ module.exports = {
       accounts: [goerliacc],
       chainId: 5,
     },
-    local: {
+    ganache: {
       url: local_provider,
       accounts: [local_key],
-      chainId: 31337,
+      chainId: 1337,
     },
   },
   gasReporter: {
@@ -30,6 +30,6 @@ module.exports = {
     noColors: true,
     currency: "INR",
     coinmarketcap: coinmarket_api_key,
-    token: "USD",
+    token: "MATIC",
   },
 };

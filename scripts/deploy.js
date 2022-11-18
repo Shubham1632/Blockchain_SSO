@@ -13,7 +13,7 @@ async function sso() {
   await sso.deployed();
 
   // const info = await sso.address;
-  console.log(`contract deployed to :${sso.address}`);
+  console.log(`contract SSO deployed to :${sso.address}`);
 }
 
 // We recommend this pattern to be able to use async/await everywhere

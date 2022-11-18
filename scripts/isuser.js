@@ -17,11 +17,14 @@ async function getContract() {
   return sso;
 }
 
+const username = "Samartha";
+
 async function user() {
   const sso = await getContract();
-  const isp = await sso.isuser("suda");
-  if (isp) console.log("present");
-  else console.log("not present");
+  const isp = await sso.isuser(username);
+  if (isp)
+    console.log(`Yes , the username ${username} is present in our system`);
+  else console.log(`No, the username ${username} is not present in our system`);
 }
 
 user().catch((error) => {

@@ -17,10 +17,13 @@ async function getContract() {
   return sso;
 }
 
+const username = "Shubham";
+const password = "Shubham@142";
+
 async function validate() {
   const sso = await getContract();
-  const pass = await sso.retirve("Shubham");
-  if (pass === "Shubham@142") {
+  const pass = await sso.retirve(username);
+  if (pass == password) {
     console.log("you are validated");
   } else {
     console.log("you are not a validated user");

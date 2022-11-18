@@ -2,6 +2,7 @@ const { soliditySha256 } = require("ethers/lib/utils");
 const { ethers } = require("hardhat");
 require("dotenv").config();
 const fs = require("fs");
+const { getIndexedSignatureForEvent } = require("typechain");
 
 const address = process.env.address;
 const prov = process.env.local_provider;
@@ -19,18 +20,27 @@ async function getContract() {
   return sso;
 }
 
+const username = "Shubham";
+const email = "shubhamgangurde16@gamil.com";
+const pass = "@shubham163";
+const add = "nashik";
+const alterid = "Shubham@16";
+const phone_no = 9822701621;
+
 async function store() {
   const sso = await getContract();
   const newuser = await sso.createUser(
-    "shubham",
-    "@gamil.com",
-    "@shubham",
-    "nashik",
-    "@16",
-    49820
+    username,
+    email,
+    pass,
+    add,
+    alterid,
+    phone_no
   );
   await newuser.wait(1);
-  // console.log(`the value stored at ${newuser.address}`);
+  console.log(`The user is sucssesfully registerd`);
+  const curruser = await sso.getinfo(username);
+  console.log(`The registered user is : ${curruser}`);
 }
 
 store().catch((error) => {
