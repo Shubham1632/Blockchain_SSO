@@ -5,14 +5,14 @@ pragma solidity ^0.8.0;
 contract sso {
     uint public userCount = 0;
 
-    mapping(string => user) public usersList;
-
     struct user {
         string username;
         string email;
         string password;
         uint256 num;
     }
+
+    mapping(string => user) public usersList;
 
     event userCreated(string alter_email, string addr, uint256 number);
 
