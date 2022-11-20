@@ -23,11 +23,12 @@ yarn hardhat run scripts/deploy.js
 ## Open for all kind of contributions
 
 
-Try running some of the following tasks: (can use yarn/npx)
+Try running some of the following tasks: (can use yarn/npx) 
+> i used YARN in project
 
 ```shell
 npx hardhat help
-npx hardhat test
+npx hardhat test 
 npx hardhat node
 npx hardhat run scripts/deploy.js
 npx hardhat run scripts/store.js
