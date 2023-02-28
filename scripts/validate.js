@@ -18,12 +18,12 @@ async function getContract() {
 }
 
 const username = "Shubham";
-const password = "Shubham@142";
+const password = "@shubham163";
 
 async function validate() {
   const sso = await getContract();
-  const pass = await sso.retirve(username);
-  if (pass == password) {
+  const pass = await sso.validate(username, password);
+  if (pass) {
     console.log("you are validated");
   } else {
     console.log("you are not a validated user");

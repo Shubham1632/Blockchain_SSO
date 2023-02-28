@@ -13,6 +13,7 @@ contract sso {
     }
 
     mapping(string => user) public usersList;
+    mapping(address => user) public userAddress;
 
     event userCreated(string alter_email, string addr, uint256 number);
 
@@ -44,11 +45,17 @@ contract sso {
         return usersList[_user];
     }
 
-    function retirve(string memory _user)
-        external
-        view
-        returns (string memory)
-    {
-        return usersList[_user].password;
+    function validate(
+        string memory _user,
+        string memory _password
+    ) external view returns (bool) {
+        bytes memory b1 = bytes(usersList[_user].password);
+        bytes memory b2 = bytes(_password);
+        uint256 l1 = b1.length;
+        if (l1 != b2.length) return false;
+        for (uint256 i = 0; i < l1; i++) {
+            if (b1[i] != b2[i]) return false;
+        }
+        return true;
     }
 }
