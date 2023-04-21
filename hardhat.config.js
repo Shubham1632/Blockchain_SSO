@@ -1,35 +1,18 @@
-// const { hardhatArguments } = require("hardhat");
-require("dotenv").config();
-require("hardhat-gas-reporter");
 require("@nomicfoundation/hardhat-toolbox");
+require("dotenv").config();
 
-const rpcurl = process.env.rpc_url;
-const goerliacc = process.env.private_key;
-const coinmarket_api_key = process.env.coin_marketcap_key;
-const local_provider = process.env.local_provider;
-const local_key = process.env.local_key;
 /** @type import('hardhat/config').HardhatUserConfig */
+
+const ganacheProvider = process.env.ganacheProvider;
+const ganachePrivateKey = process.env.ganachePrivateKey;
+
 module.exports = {
   solidity: "0.8.17",
-  defaultNetwork: "hardhat",
   networks: {
-    goerli: {
-      url: rpcurl,
-      accounts: [goerliacc],
-      chainId: 5,
-    },
     ganache: {
-      url: local_provider,
-      accounts: [local_key],
+      url: ganacheProvider,
+      accounts: [ganachePrivateKey],
       chainId: 1337,
     },
-  },
-  gasReporter: {
-    enabled: true,
-    outputFile: "gas-report.txt",
-    noColors: true,
-    currency: "INR",
-    coinmarketcap: coinmarket_api_key,
-    token: "MATIC",
   },
 };

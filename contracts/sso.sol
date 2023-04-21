@@ -1,9 +1,14 @@
-// SPDX-License-Identifier: GPL-3.0
+// SPDX-License-Identifier: MIT
 
 pragma solidity ^0.8.0;
 
 contract sso {
     uint public userCount = 0;
+    address private owner;
+
+    constructor() {
+        owner = msg.sender;
+    }
 
     struct user {
         string username;
@@ -12,14 +17,14 @@ contract sso {
         uint256 num;
     }
 
-    mapping(string => user) public usersList;
-    mapping(address => user) public userAddress;
+    mapping(string => user) private usersList;
+    mapping(address => user) private userOfAddress;
 
     event userCreated(string alter_email, string addr, uint256 number);
 
-    function isuser(string memory _user) public view returns (bool) {
-        if (usersList[_user].num > 0) return true;
-        else return false;
+    modifier onlyowner() {
+        require(msg.sender == owner);
+        _;
     }
 
     function createUser(
@@ -28,21 +33,15 @@ contract sso {
         string memory _password,
         string memory _addr,
         string memory _alt_email,
-        uint256 _number
-    ) public {
-        if (isuser(_username) == false) {
+        uint256 _number,
+        address _address
+    ) public onlyowner {
+        if (isUserOfName(_username) == false) {
             userCount++;
             usersList[_username] = user(_username, _email, _password, _number);
+            userOfAddress[_address] = usersList[_username];
             emit userCreated(_alt_email, _addr, _number);
         }
-    }
-
-    function getusercount() public view returns (uint256) {
-        return userCount;
-    }
-
-    function getinfo(string memory _user) external view returns (user memory) {
-        return usersList[_user];
     }
 
     function validate(
@@ -57,5 +56,27 @@ contract sso {
             if (b1[i] != b2[i]) return false;
         }
         return true;
+    }
+
+    function isUserOfName(string memory _user) public view returns (bool) {
+        if (usersList[_user].num > 0) return true;
+        else return false;
+    }
+
+    function isUserOfAddress(address _address) external view returns (bool) {
+        if (userOfAddress[_address].num > 0) return true;
+        else return false;
+    }
+
+    function getusercount() public view returns (uint256) {
+        return userCount;
+    }
+
+    function getUserNameByAddress(
+        address _address
+    ) external view returns (string memory) {
+        if (isUserOfName(userOfAddress[_address].username))
+            return userOfAddress[_address].username;
+        else return "Not Found";
     }
 }
