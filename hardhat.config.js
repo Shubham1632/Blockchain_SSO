@@ -8,6 +8,8 @@ const goerliacc = process.env.private_key;
 const coinmarket_api_key = process.env.coin_marketcap_key;
 const local_provider = process.env.local_provider;
 const local_key = process.env.local_key;
+const sepolia_rpc_url = process.env.sepolia_rpc_url;
+const sepolia_private_key = process.env.sepolia_private_key;
 /** @type import('hardhat/config').HardhatUserConfig */
 module.exports = {
   solidity: "0.8.17",
@@ -22,6 +24,11 @@ module.exports = {
       url: local_provider,
       accounts: [local_key],
       chainId: 1337,
+    },
+    sepolia: {
+      url: sepolia_rpc_url,
+      accounts: [sepolia_private_key],
+      chainId: 11155111,
     },
   },
   gasReporter: {

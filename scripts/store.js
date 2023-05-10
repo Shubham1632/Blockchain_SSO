@@ -5,8 +5,8 @@ const fs = require("fs");
 const { getIndexedSignatureForEvent } = require("typechain");
 
 const address = process.env.address;
-const prov = process.env.local_provider;
-const local_key = process.env.local_key;
+const prov = process.env.sepolia_rpc_url;
+const local_key = process.env.sepolia_private_key;
 
 async function getContract() {
   const data = await fs.promises.readFile(
@@ -26,21 +26,13 @@ const pass = "@shubham163";
 const add = "nashik";
 const alterid = "Shubham@16";
 const phone_no = 9822701621;
+const userAddress = "0x8F3eAb871D8Aaa6B6c0e20CcEEB3018a68ef34a3";
 
 async function store() {
   const sso = await getContract();
-  const newuser = await sso.createUser(
-    username,
-    email,
-    pass,
-    add,
-    alterid,
-    phone_no
-  );
+  const newuser = await sso.createUser(username, email, pass, userAddress);
   await newuser.wait(1);
   console.log(`The user is sucssesfully registerd`);
-  const curruser = await sso.getinfo(username);
-  console.log(`The registered user is : ${curruser}`);
 }
 
 store().catch((error) => {
