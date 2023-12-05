@@ -21,7 +21,7 @@ yarn hardhat run scripts/deploy.js
 
 
 ## Open for all kind of contributions
-
+- try running at your end and feel happy to contribute
 
 Try running some of the following tasks: (can use yarn/npx) 
 > i used YARN in project
