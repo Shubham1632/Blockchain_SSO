@@ -21,10 +21,14 @@ const username = "Samartha";
 
 async function user() {
   const sso = await getContract();
-  const isp = await sso.isuser(username);
+  const isp = await sso.isuser(username); 
+  logResults(isp);
+}
+
+function logResults(isp){
   if (isp)
-    console.log(`Yes , the username ${username} is present in our system`);
-  else console.log(`No, the username ${username} is not present in our system`);
+  console.log(`Yes , the user with usename ${username} is present in our system`);
+else console.log(`No, the username ${username} is not present in our system`);
 }
 
 user().catch((error) => {
