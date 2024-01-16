@@ -32,6 +32,10 @@ async function store() {
   const sso = await getContract();
   const newuser = await sso.createUser(username, email, pass, userAddress);
   await newuser.wait(1);
+  logResult();
+}
+
+function logResult(){
   console.log(`The user is sucssesfully registerd`);
 }
 

@@ -23,6 +23,10 @@ const password = "@shubham163";
 async function validate() {
   const sso = await getContract();
   const pass = await sso.validate(username, password);
+  logResult(pass);
+}
+
+function logResult(pass){
   if (pass) {
     console.log("you are validated");
   } else {
